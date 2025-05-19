@@ -1,0 +1,200 @@
+{
+  "name": "EmailAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9117ca28-c8b9-4c0b-bb31-9145a1fa74e8",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 2,
+        "filters": {
+          "labelIds": [
+            "UNREAD"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "9ec842bc-0b4a-48ec-b5cc-9ef7581dc32b",
+      "name": "Gmail All Mails",
+      "webhookId": "c11d9930-95f3-43ed-a6e2-fe5f46b4dab0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9CnvDZgiyuieABB3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.threadId }} "
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "547375cd-8861-416b-829c-1b8d53166d3c",
+      "name": "Gmail All Details",
+      "webhookId": "d322d732-0c6b-4672-9d24-c46e09b1d78d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9CnvDZgiyuieABB3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=subject : {{ $json.Subject }}\nEmail body: {{ $json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "<Agentinstructions>\n    <Role>\n        <name> Email Reply Agent </name>\n        <Description> Helpful email reply agent </Description>\n    </Role>\n\n\n    <Goal>\n        <primary> Draft custom but very professional email replies which are 100% humanlike. </primary>\n        <secondary> As a Email reply agent you should not only reply but also build trust and Reputation with the person you are replying too </secondary>\n    </Goal>\n\n    <Instructions>\n        <Instruction> Once you receive the email, you should thoroughly understand and analyse the subject line and ful email body message </Instruction>\n        <Instruction> After you read the email, Review <Details> and <Aims> to understand the context of the user before drafting and reply</Instruction>\n        <Instruction> Draft a professional Reply using <Userinfo></Instruction>\n    </Instructions>\n\n    <Userinfo>\n        <Details>   \n            <Detail name = \"User Name\"> Rohan Lodhi </Detail>\n             <Detail name = \"Company\"> Backbase </Detail>\n             <Detail name = \"Age\"> 31 </Detail>\n              <Detail name = \"Contact info\"> +91-8793279778 </Detail>\n              <Details>  \n\n              <Aims>\n              <Aim name = \"Mission\"> Wants to search new role and oppotunity in android Development</Aim>\n                <Aim name = \"Focus\"> Right now focus on learning n8n</Aim> \n                 <Aims>\n                 </Userinfo>\n\n\n\n            </Agentinstructions>   \n                        "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        660,
+        0
+      ],
+      "id": "2de3bc69-9696-48c0-873b-1437c8a5eceb",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        680,
+        240
+      ],
+      "id": "5d98f359-3c9f-447a-b863-847c2bea654e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "GAJXYok4NQTvyWvl",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('Gmail All Details').item.json.threadId }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1020,
+        0
+      ],
+      "id": "ae11975f-b49a-45fa-a68a-cf43dcbc8981",
+      "name": "Gmail",
+      "webhookId": "05a5a3e4-b1bf-40a7-865d-d34e8a89fe20",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9CnvDZgiyuieABB3",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gmail All Mails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail All Mails": {
+      "main": [
+        [
+          {
+            "node": "Gmail All Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail All Details": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d499f1b6-0d14-4b31-b18c-fa020204f823",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8ae4db5a6967ac8004f2c1d1514184228ab0c4b646e644b1679376df8d64a442"
+  },
+  "id": "fzEsV2pO0kUNgafn",
+  "tags": []
+}
