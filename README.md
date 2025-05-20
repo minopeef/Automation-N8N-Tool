@@ -116,5 +116,69 @@ This automation setup reads emails from your Gmail inbox, analyzes them using a 
   <Instruction>Review <Details> and <Aims> to understand the user's context before replying</Instruction>
   <Instruction>Use <Userinfo> to personalize the email</Instruction>
 </Instructions>
+```
+
+---
+
+
+# 💬 Smart AI Chat System with n8n + Gemini + Custom Frontend
+
+A fully functional **real-time AI chat assistant** powered by [n8n](https://n8n.io/), the **Google Gemini Chat Model**, and a **custom UI frontend** hosted on [lovable.dev](https://lovable.dev).
+
+📄 **[👉 View Workflow JSON](https://github.com/rohan5576/n8n_Automations/blob/main/workflows/ChatApplication.json)**  
+🖼️ **Chat System Screenshot**  
+![Smart AI Chat System](./images/ChatApp.png)
+
+
+
+## 🧠 What It Does
+
+- Offers users a clean, interactive chat UI.
+- Routes messages through n8n for AI processing.
+- Uses a Google Gemini-powered **AI Agent** to generate smart, contextual replies.
+- Responds instantly through Webhook — **no traditional backend required**.
+
+
+
+## 🔄 How It Works
+
+1. **👤 User Sends a Message**  
+   Through a real-time chat UI (custom frontend hosted at `lovable.dev`).
+
+2. **⚡ Trigger: Webhook in n8n**  
+   The message hits a webhook node in n8n and initiates the automation workflow.
+
+3. **🧠 AI Agent Node**  
+   - Processes the message using the **Google Gemini Chat Model**.
+   - Can incorporate memory and tools for smarter replies.
+
+4. **🔁 Respond to Webhook**  
+   The intelligent response is sent back to the frontend in real time.
+
+
+## 🛠️ Tech Stack & Nodes
+
+| Component        | Purpose                                  |
+|------------------|------------------------------------------|
+| `Webhook`        | Entry point for the chat messages        |
+| `AI Agent Node`  | Executes the AI logic                    |
+| `Gemini Chat`    | Powers natural language understanding    |
+| `Respond to Webhook` | Sends message back to frontend       |
+| `Frontend (lovable.dev)` | Displays the conversation        |
+
+
+## 🌟 Features
+
+- ✅ Real-time messaging with AI
+- 🚫 No need for traditional backends
+- 🧩 Pluggable: Add memory, tools, or databases as needed
+- 📈 Scalable and modular
+- 🎨 Clean and customizable frontend UI
+
+
+
+
+
+
 
 
