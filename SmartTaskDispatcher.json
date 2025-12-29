@@ -573,7 +573,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=I want you to act like best poem creator and create a two line poem based on given below. poem should be externly simple.\n\nI want you to include these things in the Poem :\n Name : {{ $json.fields.Name }}\nLooks : {{ $json.fields.Looks }}\nProfession :{{ $json.fields.Rating }}\n",
+        "text": "=I want you to act like best poem creator and create a two line poem based on given below. Poem should be extremely simple.\n\nI want you to include these things in the Poem:\nName: {{ $json.fields.Name }}\nLooks: {{ $json.fields.Looks }}\nProfession: {{ $json.fields['Notes Profession'] }}\n",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",

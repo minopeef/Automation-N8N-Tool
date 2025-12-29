@@ -1,184 +1,259 @@
-
-
-# 🤖 AI-Powered Task Routing Automation with n8n
-
-
- I tried something interesting with **[n8n](https://n8n.io/)** — a no-code/low-code automation platform — and built a working automation that brings together **AI decision-making and smart task routing**.
-
----
-
-## 📋 Workflow Overview
-
-**Smart task dispatcher** [👉 View Workflow JSON](https://github.com/rohan5576/n8n_Automations/blob/main/workflows/email_reply_agent.json)
-
-![Smart Task Dispatcher](https://github.com/rohan5576/n8n_Automations/blob/main/images/smart_task_dispatcher.png?raw=true)
-
-This n8n workflow acts as a **smart task dispatcher**, handling form inputs, routing tasks based on roles, and using AI for enhanced automation.
-
-### 🔄 Step-by-Step Flow
-
-1. **📝 On Form Submission**
-   - The workflow is triggered when a form is submitted (e.g., task request or role selection).
-
-2. **📤 Airtable Record Creation**
-   - Captures the form data and creates a new record in Airtable.
-
-3. **🔀 Switch Logic (Routing)**
-   - A Switch node checks the role or task type (e.g., Graphic Designer or Manager).
-   - Based on the condition, it updates the appropriate Airtable table.
-
-4. **🤖 AI Agent Integration**
-   - An AI Agent processes the input using:
-     - A Chat Model (Google Gemini),
-     - Toolset and Memory capabilities,
-     - Real-time Google Search if required.
-   - It can enhance, validate, or suggest next steps for the request.
-
-5. **📁 Final Airtable Update**
-   - The AI output is stored back in another Airtable record for tracking or further use.
-
-
-## 🛠️ Tools & Nodes Used
-
-- **Form Trigger** – To capture user inputs.
-- **Airtable Nodes** – For creating and updating records.
-- **Switch Node** – Routes tasks based on logic.
-- **AI Agent (Tools Agent)** – The core intelligence, enriched with memory and tools.
-- **Google Gemini Chat Model** – For understanding and responding to inputs.
-- **Google Search Tool** – Adds dynamic, real-time context if needed.
-
-
-## 🎯 Use Case
-
-This setup can serve as a **lightweight AI-driven task intake and routing system**. Perfect for:
-- Creative or marketing teams managing requests.
-- Automating task classification and delegation.
-- Using AI to validate or augment requests.
-
-
-## 💡 Why This?
-
-By combining **n8n’s workflow automation** with **AI reasoning**, this project explores how you can quickly scale smart operations — all with minimal code.
-
-
----
-
-
-
-# 📬 AI-Powered Email Reply Agent (n8n Automation)
-
-This project demonstrates how to use **n8n** and an **AI Agent** (powered by the Google Gemini Chat Model) to automate **professional email replies** in a human-like and context-aware way. It's ideal for professionals looking to automate inbox management while maintaining personalization and professionalism.
-
-[👉 View Workflow JSON](https://github.com/rohan5576/n8n_Automations/blob/main/EmailAgent.json)
-
-![Email Reply Agent](https://github.com/rohan5576/n8n_Automations/blob/main/images/EmailReplyAgent.png)
-![Email Reply Agent](https://github.com/rohan5576/n8n_Automations/blob/main/images/EmailAIIntrustions.png)
-
-
-## 🧠 Overview
-
-This automation setup reads emails from your Gmail inbox, analyzes them using a custom-configured **AI Agent**, and drafts personalized, professional replies.
-
-### 🌟 Agent Capabilities
-
-- 📥 Reads all incoming emails
-- 🧠 Analyzes email subject and content
-- ✍️ Drafts thoughtful, human-like replies
-- 🤝 Aims to build **trust and reputation** in responses
-- ✅ Marks emails as read after processing
-
-
-## 🔧 Workflow Structure
-
-### Nodes Used:
-
-- **Schedule Trigger** – To periodically check emails
-- **Gmail Nodes** – To fetch and update emails
-- **AI Agent** – The intelligent engine that creates the reply
-- **Google Gemini Chat Model** – For natural language understanding and generation
-
-
-## 💼 Agent Instructions
-
-```xml
-<Role>
-  <name>Email Reply Agent</name>
-  <Description>Helpful email reply agent</Description>
-</Role>
-
-<Goal>
-  <primary>Draft custom but very professional email replies which are 100% humanlike.</primary>
-  <secondary>Build trust and reputation with the person you are replying to.</secondary>
-</Goal>
-
-<Instructions>
-  <Instruction>Understand and analyze the subject line and full email body</Instruction>
-  <Instruction>Review <Details> and <Aims> to understand the user's context before replying</Instruction>
-  <Instruction>Use <Userinfo> to personalize the email</Instruction>
-</Instructions>
-```
-
----
-
-
-# 💬 Smart AI Chat System with n8n + Gemini + Custom Frontend
-
-A fully functional **real-time AI chat assistant** powered by [n8n](https://n8n.io/), the **Google Gemini Chat Model**, and a **custom UI frontend** hosted on [lovable.dev](https://lovable.dev).
-
-📄 **[👉 View Workflow JSON](https://github.com/rohan5576/n8n_Automations/blob/main/workflows/ChatApplication.json)**  
-🖼️ **Chat System Screenshot**  
-![Smart AI Chat System](./images/ChatApp.png)
-
-
-
-## 🧠 What It Does
-
-- Offers users a clean, interactive chat UI.
-- Routes messages through n8n for AI processing.
-- Uses a Google Gemini-powered **AI Agent** to generate smart, contextual replies.
-- Responds instantly through Webhook — **no traditional backend required**.
-
-
-
-## 🔄 How It Works
-
-1. **👤 User Sends a Message**  
-   Through a real-time chat UI (custom frontend hosted at `lovable.dev`).
-
-2. **⚡ Trigger: Webhook in n8n**  
-   The message hits a webhook node in n8n and initiates the automation workflow.
-
-3. **🧠 AI Agent Node**  
-   - Processes the message using the **Google Gemini Chat Model**.
-   - Can incorporate memory and tools for smarter replies.
-
-4. **🔁 Respond to Webhook**  
-   The intelligent response is sent back to the frontend in real time.
-
-
-## 🛠️ Tech Stack & Nodes
-
-| Component        | Purpose                                  |
-|------------------|------------------------------------------|
-| `Webhook`        | Entry point for the chat messages        |
-| `AI Agent Node`  | Executes the AI logic                    |
-| `Gemini Chat`    | Powers natural language understanding    |
-| `Respond to Webhook` | Sends message back to frontend       |
-| `Frontend (lovable.dev)` | Displays the conversation        |
-
-
-## 🌟 Features
-
-- ✅ Real-time messaging with AI
-- 🚫 No need for traditional backends
-- 🧩 Pluggable: Add memory, tools, or databases as needed
-- 📈 Scalable and modular
-- 🎨 Clean and customizable frontend UI
-
-
-
-
-
-
-
-
+# AI-Powered Task Routing Automation with n8n
+
+This project contains three n8n automation workflows that demonstrate AI-powered task routing, email automation, and chat applications using Google Gemini AI models.
+
+## Project Overview
+
+This collection showcases how to build intelligent automation workflows using n8n's no-code/low-code platform combined with AI decision-making capabilities. Each workflow demonstrates different use cases for AI integration in business automation.
+
+## Workflows
+
+### 1. Smart Task Dispatcher
+
+A workflow that handles form submissions, routes tasks based on roles, and uses AI for enhanced automation and content generation.
+
+**Workflow File:** SmartTaskDispatcher.json
+
+**Functionality:**
+- Captures form submissions with fields: Name, Looks, and Profession
+- Creates records in Airtable for task tracking
+- Routes tasks based on profession type (Video Editor, Graphic Designer, Manager)
+- Assigns different ratings based on profession routing
+- Uses AI Agent to generate personalized poems based on submitted data
+- Updates Airtable records with AI-generated content
+
+**Workflow Steps:**
+1. Form Trigger - Captures user input through a web form
+2. Airtable Create - Stores initial form data in Airtable
+3. Switch Node - Routes tasks based on profession field
+4. Airtable Update - Updates records with profession-specific ratings
+5. AI Agent - Generates creative content (poems) using Google Gemini
+6. Final Airtable Update - Stores AI-generated content back to records
+
+**Nodes Used:**
+- Form Trigger - Captures user inputs
+- Airtable Nodes - For creating and updating records
+- Switch Node - Routes tasks based on logic conditions
+- AI Agent (Tools Agent) - Core intelligence for content generation
+- Google Gemini Chat Model (gemini-1.5-flash) - Powers AI responses
+
+**Use Cases:**
+- Creative or marketing teams managing requests
+- Automating task classification and delegation
+- Using AI to validate or augment requests
+- Content generation based on user input
+
+### 2. Email Reply Agent
+
+An automated email management system that reads emails from Gmail, analyzes them using AI, and drafts professional, human-like replies.
+
+**Workflow File:** EmailAgent.json
+
+**Functionality:**
+- Periodically checks Gmail inbox for unread emails (every 2 hours)
+- Retrieves full email details including subject and body
+- Analyzes email content using AI Agent with custom instructions
+- Generates professional, personalized email replies
+- Marks processed emails as read
+
+**Workflow Steps:**
+1. Schedule Trigger - Runs every 2 hours to check for new emails
+2. Gmail GetAll - Fetches unread emails from inbox
+3. Gmail Get - Retrieves full email details including body content
+4. AI Agent - Processes email and generates reply using custom instructions
+5. Gmail MarkAsRead - Marks email as processed
+
+**AI Agent Configuration:**
+The AI Agent is configured with detailed instructions including:
+- Role definition as Email Reply Agent
+- Primary goal: Draft professional, human-like email replies
+- Secondary goal: Build trust and reputation with recipients
+- User context information for personalization
+- Custom instructions for email analysis and reply generation
+
+**Nodes Used:**
+- Schedule Trigger - Periodic email checking
+- Gmail Nodes - Email retrieval and management
+- AI Agent - Intelligent reply generation
+- Google Gemini Chat Model (gemini-1.5-flash) - Natural language processing
+
+**Use Cases:**
+- Automated inbox management
+- Professional email response automation
+- Maintaining consistent communication standards
+- Reducing manual email handling time
+
+### 3. Chat Application
+
+A real-time AI chat system that provides instant responses through a webhook-based architecture.
+
+**Workflow File:** ChatApplication.json
+
+**Functionality:**
+- Receives chat messages via webhook POST requests
+- Processes messages through AI Agent
+- Returns intelligent responses in real-time
+- No traditional backend required - fully webhook-based
+
+**Workflow Steps:**
+1. Webhook Trigger - Receives POST requests at /mychatapp endpoint
+2. AI Agent - Processes incoming messages
+3. Respond to Webhook - Sends AI-generated response back to client
+
+**Nodes Used:**
+- Webhook - Entry point for chat messages
+- AI Agent Node - Executes AI logic
+- Google Gemini Chat Model (gemini-2.0-flash) - Powers natural language understanding
+- Respond to Webhook - Sends response back to frontend
+
+**Technical Details:**
+- Webhook path: /mychatapp
+- HTTP Method: POST
+- Request body format: { "body": { "message": "user message" } }
+- Response: AI-generated text response
+
+**Use Cases:**
+- Real-time customer support chatbots
+- Interactive AI assistants
+- Integration with custom frontend applications
+- Scalable chat solutions without traditional backend infrastructure
+
+## Technical Stack
+
+**Platform:** n8n (no-code/low-code automation platform)
+
+**AI Models:**
+- Google Gemini 1.5 Flash - Used in Email Agent and Smart Task Dispatcher
+- Google Gemini 2.0 Flash - Used in Chat Application
+
+**Integrations:**
+- Airtable - Database and record management
+- Gmail - Email processing and management
+- Google Gemini API - AI language model integration
+
+**Key n8n Nodes:**
+- Form Trigger
+- Webhook
+- Schedule Trigger
+- Airtable (Create, Update operations)
+- Gmail (GetAll, Get, MarkAsRead operations)
+- Switch (Conditional routing)
+- AI Agent (LangChain integration)
+- Respond to Webhook
+
+## Setup Instructions
+
+### Prerequisites
+- n8n instance (self-hosted or cloud)
+- Google Gemini API credentials
+- Airtable account with Personal Access Token (for Smart Task Dispatcher)
+- Gmail account with OAuth2 credentials (for Email Agent)
+
+### Installation Steps
+
+1. Import Workflow JSON files into your n8n instance
+2. Configure credentials:
+   - Google Gemini API credentials
+   - Airtable Personal Access Token (for Smart Task Dispatcher)
+   - Gmail OAuth2 credentials (for Email Agent)
+3. Update workflow-specific settings:
+   - Airtable base and table IDs (Smart Task Dispatcher)
+   - Webhook URLs and paths (Chat Application)
+   - Schedule intervals (Email Agent)
+4. Activate workflows in n8n
+
+### Configuration Notes
+
+**Smart Task Dispatcher:**
+- Configure Airtable base ID and table ID
+- Update form field names to match your requirements
+- Adjust profession types and ratings as needed
+- Customize AI Agent prompt for different content types
+
+**Email Agent:**
+- Set appropriate schedule interval for email checking
+- Configure Gmail label filters if needed
+- Update system message with your user information
+- Adjust email processing limits
+
+**Chat Application:**
+- Note the webhook URL generated by n8n
+- Configure frontend to send POST requests to webhook endpoint
+- Update request/response format as needed
+- Add authentication if required for production use
+
+## Optimization Improvements
+
+The workflows have been optimized for better performance and reliability:
+
+**EmailAgent.json:**
+- Fixed messageId reference to use correct Gmail message ID field
+- Improved email body extraction to use full text content instead of snippet
+- Corrected XML formatting in AI Agent system message
+- Fixed unclosed XML tags and improved structure
+
+**SmartTaskDispatcher.json:**
+- Fixed typo in AI prompt ("externly" to "extremely")
+- Corrected field reference in poem generation prompt
+- Improved prompt formatting for better AI understanding
+
+**ChatApplication.json:**
+- Already optimized with latest Gemini 2.0 Flash model
+- Clean webhook-based architecture
+
+## Best Practices
+
+1. **Error Handling:** Add error handling nodes to catch and log failures
+2. **Rate Limiting:** Be mindful of API rate limits for Gmail and Gemini
+3. **Security:** Use environment variables for sensitive credentials
+4. **Monitoring:** Set up execution monitoring and alerts in n8n
+5. **Testing:** Test workflows with sample data before production use
+6. **Documentation:** Keep workflow documentation updated with any customizations
+
+## Use Case Examples
+
+**Smart Task Dispatcher:**
+- Team task intake and routing system
+- Automated content generation based on user input
+- Role-based task assignment and tracking
+
+**Email Agent:**
+- Automated customer support responses
+- Professional email reply generation
+- Inbox management and prioritization
+
+**Chat Application:**
+- Customer service chatbots
+- Interactive AI assistants
+- Real-time communication systems
+
+## Limitations and Considerations
+
+- AI responses may vary and should be reviewed for critical communications
+- Gmail API has rate limits that may affect high-volume email processing
+- Airtable API limits apply to record creation and updates
+- Webhook-based chat requires stable network connectivity
+- Customize AI prompts based on your specific use case requirements
+
+## Future Enhancements
+
+Potential improvements for these workflows:
+- Add memory capabilities to AI Agents for context retention
+- Implement error handling and retry logic
+- Add logging and monitoring capabilities
+- Create workflow templates for different industries
+- Integrate additional AI tools and capabilities
+- Add user authentication and authorization
+- Implement response validation and quality checks
+
+## Support and Maintenance
+
+- Regularly update n8n to latest version for security and features
+- Monitor API usage and costs
+- Review and update AI prompts based on performance
+- Test workflows after n8n updates
+- Keep credentials secure and rotate regularly
+
+## License
+
+This project contains n8n workflow configurations for automation purposes. Ensure compliance with n8n licensing and terms of service for your use case.

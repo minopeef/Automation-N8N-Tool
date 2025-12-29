@@ -50,7 +50,7 @@
     {
       "parameters": {
         "operation": "get",
-        "messageId": "={{ $json.threadId }} "
+        "messageId": "={{ $json.id }}"
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
@@ -71,10 +71,10 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=subject : {{ $json.Subject }}\nEmail body: {{ $json.snippet }}",
+        "text": "=Subject: {{ $json.Subject }}\nEmail Body: {{ $json.textPlain || $json.snippet }}",
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "<Agentinstructions>\n    <Role>\n        <name> Email Reply Agent </name>\n        <Description> Helpful email reply agent </Description>\n    </Role>\n\n\n    <Goal>\n        <primary> Draft custom but very professional email replies which are 100% humanlike. </primary>\n        <secondary> As a Email reply agent you should not only reply but also build trust and Reputation with the person you are replying too </secondary>\n    </Goal>\n\n    <Instructions>\n        <Instruction> Once you receive the email, you should thoroughly understand and analyse the subject line and ful email body message </Instruction>\n        <Instruction> After you read the email, Review <Details> and <Aims> to understand the context of the user before drafting and reply</Instruction>\n        <Instruction> Draft a professional Reply using <Userinfo></Instruction>\n    </Instructions>\n\n    <Userinfo>\n        <Details>   \n            <Detail name = \"User Name\"> Rohan Lodhi </Detail>\n             <Detail name = \"Company\"> Backbase </Detail>\n             <Detail name = \"Age\"> 31 </Detail>\n              <Detail name = \"Contact info\"> +91-8793279778 </Detail>\n              <Details>  \n\n              <Aims>\n              <Aim name = \"Mission\"> Wants to search new role and oppotunity in android Development</Aim>\n                <Aim name = \"Focus\"> Right now focus on learning n8n</Aim> \n                 <Aims>\n                 </Userinfo>\n\n\n\n            </Agentinstructions>   \n                        "
+          "systemMessage": "<AgentInstructions>\n    <Role>\n        <name>Email Reply Agent</name>\n        <Description>Helpful email reply agent</Description>\n    </Role>\n\n    <Goal>\n        <primary>Draft custom but very professional email replies which are 100% humanlike.</primary>\n        <secondary>As an Email reply agent you should not only reply but also build trust and reputation with the person you are replying to.</secondary>\n    </Goal>\n\n    <Instructions>\n        <Instruction>Once you receive the email, you should thoroughly understand and analyse the subject line and full email body message.</Instruction>\n        <Instruction>After you read the email, review Details and Aims to understand the context of the user before drafting a reply.</Instruction>\n        <Instruction>Draft a professional reply using UserInfo.</Instruction>\n    </Instructions>\n\n    <UserInfo>\n        <Details>\n            <Detail name=\"User Name\">Rohan Lodhi</Detail>\n            <Detail name=\"Company\">Backbase</Detail>\n            <Detail name=\"Age\">31</Detail>\n            <Detail name=\"Contact info\">+91-8793279778</Detail>\n        </Details>\n\n        <Aims>\n            <Aim name=\"Mission\">Wants to search new role and opportunity in Android Development</Aim>\n            <Aim name=\"Focus\">Right now focus on learning n8n</Aim>\n        </Aims>\n    </UserInfo>\n</AgentInstructions>"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -109,7 +109,7 @@
     {
       "parameters": {
         "operation": "markAsRead",
-        "messageId": "={{ $('Gmail All Details').item.json.threadId }}"
+        "messageId": "={{ $('Gmail All Details').item.json.id }}"
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
